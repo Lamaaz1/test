@@ -24,28 +24,35 @@ public class Guid : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        for(int j=0; j <l.Count;i++)
+        {
+            l.Remove(l[j]);
+        }
         textScoe = GameObject.FindGameObjectWithTag("score").GetComponent<Text>();
         scoreK = 0;
         rd = GetComponent<Rigidbody>();
         t = GetComponent<Transform>();
         Vector3 posPlayer = new Vector3(transform.position.x, transform.position.y, transform.position.z );
         player1=Instantiate(koralist, posPlayer , Quaternion.identity);
-        Camera.camerafollow = player1.transform;
+        //Camera.camerafollow = player1.transform;
         //l.Add(player1);
-        scoreK = +1;
-        Guid.textScoe.text = Guid.scoreK.ToString();
+       
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetMouseButton(0))
+        if (Guid.l.Count == 0)
+            lose.SetActive(true);
+
+            if (Input.GetMouseButton(0))
         {
             Vector3 currentMousee = new Vector3(Input.mousePosition.x * 3.5f / Screen.width, transform.position.y, transform.position.z);
             transform.position = currentMousee;
         }
 
         rd.velocity = new Vector3(0, 0, i);
+
         if (Time.timeScale == 1)
             i += 0.02f;
 
@@ -60,7 +67,7 @@ public class Guid : MonoBehaviour
 
             }
             Kora.dest = false;
-            Camera.camerafollow = l[0].transform;
+            //Camera.camerafollow = l[0].transform;
         }
 
     }
@@ -80,8 +87,9 @@ public class Guid : MonoBehaviour
             
             Playerss.join = false;
             Destroy(other.gameObject);
-            
-           
+
+            scoreK += 1;
+            Guid.textScoe.text = Guid.scoreK.ToString();
         }
        
     }

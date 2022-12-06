@@ -17,6 +17,7 @@ TagManager:
   - guid
   - lose
   - score
+  - support
   layers:
   - Default
   - TransparentFX

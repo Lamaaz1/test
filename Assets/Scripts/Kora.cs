@@ -21,8 +21,8 @@ public class Kora : MonoBehaviour
     //int j;
     Rigidbody rd;
     float i = 8;
-    int ij;
-     GameObject lose;
+    int ij=0;
+     public GameObject lose;
     // Start is called before the first frame update
     void Start()
     {
@@ -53,13 +53,18 @@ public class Kora : MonoBehaviour
         else if (Guid.l.IndexOf(this.gameObject) > 0)
         {
             if (Guid.l.IndexOf(this.gameObject) >= 1)
+            {
                 ij = Guid.l.IndexOf(this.gameObject) - 1;
-            lastone = Guid.l[ij];
+                lastone = Guid.l[ij];
+                maxDistance = 1.5f;
+                float actualDistance = Vector3.Distance(transform.position, lastone.transform.position);
+                if (actualDistance > maxDistance)
+                    transform.position = Vector3.MoveTowards(transform.position, lastone.transform.position, speed * Time.deltaTime * (10 + Spd));
+            }
+             
             //maxDistance = 3 * Guid.l.IndexOf(this.gameObject);
-            maxDistance = 2;
-            float actualDistance = Vector3.Distance(transform.position, lastone.transform.position);
-            if(actualDistance>maxDistance)
-            transform.position = Vector3.MoveTowards(transform.position , lastone.transform.position  , speed*Time.deltaTime*(10+Spd));
+           
+           
           
 
         }
@@ -74,15 +79,16 @@ public class Kora : MonoBehaviour
             if (other.gameObject.CompareTag("obstcl"))
             {
 
-            if (Guid.l.Count == 1)
-            {
-                Debug.Log("khserna");
-                Time.timeScale = 0;
-                transform.localScale = new Vector3(0, 0, 0);
-                lose.SetActive(true);
-            }
+            //if (Guid.l.Count == 1)
+            //{
+            //    Debug.Log("khserna");
+            //    //lose.SetActive(true);
+            //    //Time.timeScale = 0;
+            //    //transform.localScale = new Vector3(0, 0, 0);
 
-            Guid.scoreK = -1;
+            //}
+
+            Guid.scoreK -= 1;
             Guid.textScoe.text = Guid.scoreK.ToString();
 
             destIndex = Guid.l.IndexOf(this.gameObject);
